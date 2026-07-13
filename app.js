@@ -9,8 +9,25 @@ const CFG_KEY = 'salafan_config';
 
 function loadConfig() {
     try {
-        return JSON.parse(localStorage.getItem(CFG_KEY)) || {};
-    } catch { return {}; }
+        let cfg = JSON.parse(localStorage.getItem(CFG_KEY));
+        if (!cfg || !cfg.host) {
+            cfg = {
+                host: '100.123.166.11',
+                pub: 'Sal',
+                service: 'webapi',
+                companyName: 'STAR SOFT'
+            };
+            localStorage.setItem(CFG_KEY, JSON.stringify(cfg));
+        }
+        return cfg;
+    } catch { 
+        return {
+            host: '100.123.166.11',
+            pub: 'Sal',
+            service: 'webapi',
+            companyName: 'STAR SOFT'
+        };
+    }
 }
 
 function saveConfig(cfg) {
@@ -21,7 +38,17 @@ function getBaseUrl(cfg) {
     const host    = cfg.host    || '127.0.0.1';
     const pub     = cfg.pub     || 'salafan';
     const service = cfg.service || 'webapi';
-    return `http://${host}/${pub}/hs/${service}`;
+    
+    // If the host starts with http:// or https://, use it directly
+    if (host.startsWith('http://') || host.startsWith('https://')) {
+        return `${host}/${pub}/hs/${service}`;
+    }
+    
+    // If we are on HTTPS page, or the host is a remote domain (not IP), use https
+    const isIp = /^[0-9.]+$/.test(host.split(':')[0]);
+    const protocol = (window.location.protocol === 'https:' || !isIp) ? 'https' : 'http';
+    
+    return `${protocol}://${host}/${pub}/hs/${service}`;
 }
 
 // ─── SESSION ───────────────────────────────────────────────────────────────
