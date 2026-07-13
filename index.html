@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#060913">
+    <title>STAR SOFT - Дашборд</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260711h">
+</head>
+
+<body>
+    <div id="app-status-banner" class="app-status-banner" style="display:none;"></div>
+    <div class="app-container">
+
+        <!-- ==================== LOGIN SCREEN ==================== -->
+        <div id="login-screen" class="login-screen">
+            <div class="login-card">
+                <button id="login-settings-btn" class="login-settings-btn" title="Созламалар">⚙️</button>
+                <div class="logo-section">
+                    <div class="logo-icon-bg"
+                        style="display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+                        <svg viewBox="0 0 110 100" width="110" height="100" class="animated-logo-star"
+                            xmlns="http://www.w3.org/2000/svg"
+                            style="animation: starFloat 4s ease-in-out infinite; filter: drop-shadow(0 10px 25px rgba(127, 0, 255, 0.25)); transform-origin: center; overflow: visible;">
+                            <defs>
+                                <radialGradient id="glow-grad" cx="50%" cy="50%" r="50%">
+                                    <stop offset="0%" stop-color="#7f00ff" stop-opacity="0.35" />
+                                    <stop offset="100%" stop-color="#e100ff" stop-opacity="0" />
+                                </radialGradient>
+                                <linearGradient id="main-star-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#7f00ff" />
+                                    <stop offset="50%" stop-color="#ff007f" />
+                                    <stop offset="100%" stop-color="#ff7f00" />
+                                </linearGradient>
+                                <linearGradient id="swoosh-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#00f2fe" />
+                                    <stop offset="100%" stop-color="#4facfe" />
+                                </linearGradient>
+                                <linearGradient id="outline-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.8" />
+                                    <stop offset="100%" stop-color="#7f00ff" stop-opacity="0.8" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="45" fill="url(#glow-grad)" />
+                            <path d="M 50,8 L 62,36 L 92,36 L 68,54 L 78,84 L 50,68 L 22,84 L 32,54 L 8,36 L 38,36 Z"
+                                fill="none" stroke="url(#outline-grad)" stroke-width="2.5" opacity="0.6"
+                                stroke-linejoin="round" />
+                            <path d="M 50,11 L 61,37 L 90,37 L 67,54 L 76,82 L 50,67 L 24,82 L 33,54 L 10,37 L 39,37 Z"
+                                fill="url(#main-star-grad)" />
+                            <path d="M 5,75 Q 45,65 85,25 Q 95,15 105,10 C 95,20 65,55 5,75 Z"
+                                fill="url(#swoosh-grad)" />
+                        </svg>
+                    </div>
+                    <h1 class="brand-name" id="login-company-name">STAR SOFT</h1>
+                    <p class="subtitle">Тизимга хуш келибсиз</p>
+                </div>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="phone">Телефон рақам</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">📞</span>
+                            <span class="phone-prefix">+998</span>
+                            <input type="tel" id="phone" class="phone-input" placeholder="90 123 45 67" maxlength="12"
+                                required autocomplete="tel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Парол</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🔒</span>
+                            <input type="password" id="password" class="password-input" placeholder="••••••••" required
+                                autocomplete="current-password">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary" id="login-submit-btn">Кириш</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================== MAIN SCREEN ==================== -->
+        <div id="main-screen" class="main-screen" style="display:none;">
+
+            <!-- Header (home) -->
+            <div class="header-blue" id="header-blue">
+                <div class="header-brand-name" id="header-company-name"
+                    style="font-size: 1.15rem; font-weight: 800; text-align: center;">STAR SOFT</div>
+                <div class="header-user-name" id="header-user-name" style="display:none;">Хуш келибсиз</div>
+
+                <button id="logout-btn-header" class="logout-btn-header" title="Чиқиш" style="display:none;">⏻</button>
+            </div>
+
+            <!-- Sub-screen Tab Header -->
+            <div id="tab-header" class="tab-header" style="display:none;">
+                <button id="tab-back-btn" class="tab-back-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </button>
+                <h2 id="tab-header-title" class="tab-header-title">Рўйхат</h2>
+                <div style="width:36px;"></div>
+            </div>
+
+            <!-- Date Filter -->
+            <div class="filter-bar" id="date-filter-bar" style="display:none;">
+                <div class="date-input-group">
+                    <div class="date-field">
+                        <input type="date" id="date-from">
+                    </div>
+                    <div class="date-field">
+                        <input type="date" id="date-to">
+                    </div>
+                    <button id="tab-refresh-btn" class="tab-refresh-btn" title="Янгилаш">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <polyline points="1 20 1 14 7 14"></polyline>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Home Menu -->
+            <div id="home-menu" class="home-menu-container" style="display:none;">
+                <div class="menu-grid">
+                    <div class="menu-item-container" id="menu-btn-kassa-kir">
+                        <div class="menu-circle color-emerald">📥</div>
+                        <span class="menu-label">Касса Кирими</span>
+                    </div>
+                    <div class="menu-item-container" id="menu-btn-kassa-chiq">
+                        <div class="menu-circle color-rose">📤</div>
+                        <span class="menu-label">Касса Чиқими</span>
+                    </div>
+                    <div class="menu-item-container" id="menu-btn-haridorlar">
+                        <div class="menu-circle color-rose">👥</div>
+                        <span class="menu-label">Харидорлар<br>Қарзи</span>
+                    </div>
+                    <div class="menu-item-container" id="menu-btn-taminotchilar">
+                        <div class="menu-circle color-orange">🏢</div>
+                        <span class="menu-label">Таъминотчилар<br>ҳаққи</span>
+                    </div>
+                    <div class="menu-item-container" id="menu-btn-tovar">
+                        <div class="menu-circle color-cyan">📦</div>
+                        <span class="menu-label">Товарлар</span>
+                    </div>
+                    <div class="menu-item-container" id="menu-btn-reconciliation">
+                        <div class="menu-circle color-amber">📄</div>
+                        <span class="menu-label">Акт Сверка</span>
+                    </div>
+                </div>
+                <button id="logout-btn-main" class="btn-primary" style="margin-top: 42px; background: #334155; border: 1.5px solid #000000; box-shadow: 0 0 15px rgba(51, 65, 85, 0.4); width: 100%; height: 50px; font-size: 1rem; font-weight: 700; color: #ffffff;">Чиқиш</button>
+            </div>
+
+            <!-- Content Scroll Container -->
+            <div id="content-scroll-container" class="content-scroll-container" style="display:none;">
+
+                <!-- 1. КАССА КИРИМИ -->
+                <div id="tab-content-kassa-kir" class="tab-content active">
+                    <div class="summary-card"
+                        style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                        <div>
+                            <span class="summary-label">Жами кирим</span>
+                            <h2 class="summary-value text-emerald" id="val-kir-total">0 сўм</h2>
+                        </div>
+                        <button class="btn-primary" id="btn-add-payment-kir"
+                            style="width:40px; height:40px; border-radius:50%; font-size:1.4rem; padding:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 15px rgba(16,185,129,0.45); background:linear-gradient(135deg, #10b981, #059669); flex-shrink:0;">＋</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-kir" placeholder="Контрагент бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-kassa-kir"></div>
+                </div>
+
+                <!-- 2. КАССА ЧИҚИМИ -->
+                <div id="tab-content-kassa-chiq" class="tab-content">
+                    <div class="summary-card"
+                        style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                        <div>
+                            <span class="summary-label">Жами чиқим</span>
+                            <h2 class="summary-value text-rose" id="val-chiq-total">0 сўм</h2>
+                        </div>
+                        <button class="btn-primary" id="btn-add-payment-chiq"
+                            style="width:40px; height:40px; border-radius:50%; font-size:1.4rem; padding:0; display:flex; align-items:center; justify-content:center; box-shadow:0 0 15px rgba(244,63,94,0.45); background:linear-gradient(135deg, #f43f5e, #e11d48); flex-shrink:0;">＋</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-chiq" placeholder="Контрагент бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-kassa-chiq"></div>
+                </div>
+
+                <!-- 3. ТОВАРЛАР -->
+                <div id="tab-content-tovar" class="tab-content">
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-tovar" placeholder="Товар номи бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-tovar"></div>
+                </div>
+
+                <!-- 4. ХАРИДОРЛАР ҚАРЗИ -->
+                <div id="tab-content-haridorlar" class="tab-content">
+                    <div class="summary-card"
+                        style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                        <div>
+                            <span class="summary-label">Жами қарз</span>
+                            <h2 class="summary-value text-rose" id="val-haridorlar-total">0 сўм</h2>
+                        </div>
+                        <button class="btn-primary" id="btn-haridorlar-overdue"
+                            style="width:auto; height:36px; padding:0 12px; font-size:0.78rem; border-radius:8px; box-shadow:0 0 15px rgba(244,63,94,0.4); border:1.5px solid #000000;">📅
+                            Муддати келганлар</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-haridorlar" placeholder="Харидор номи бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-haridorlar"></div>
+                </div>
+
+                <!-- 5. ТАЪМИНОТЧИЛАР -->
+                <div id="tab-content-taminotchilar" class="tab-content">
+                    <div class="summary-card"
+                        style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+                        <div>
+                            <span class="summary-label">Жами ҳақ</span>
+                            <h2 class="summary-value text-orange" id="val-taminot-total">0 сўм</h2>
+                        </div>
+                        <button class="btn-primary" id="btn-taminotchilar-overdue"
+                            style="width:auto; height:38px; padding:0 12px; font-size:0.8rem; border-radius:8px; background:linear-gradient(135deg, #f59e0b, #d97706); box-shadow:0 0 15px rgba(245,158,11,0.4); border:1.5px solid #000000;">📅
+                            Муддати келганлар</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-taminot" placeholder="Таъминотчи номи бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-taminotchilar"></div>
+                </div>
+
+                <!-- 6. АКТ СВЕРКА -->
+                <div id="tab-content-reconciliation" class="tab-content">
+                    <div class="search-wrapper" style="margin-bottom:14px;">
+                        <label
+                            style="font-size:0.8rem; font-weight:600; color:var(--text-secondary); margin-bottom:4px; display:block;">Контрагент
+                            танланг</label>
+                        <select id="reconciliation-counterparty" class="form-select"
+                            style="background:#233560; border-color:rgba(255,255,255,0.18);">
+                            <option value="">— Контрагентни танланг —</option>
+                        </select>
+                    </div>
+
+                    <div id="reconciliation-summary-box" style="display:none; margin-bottom:14px;">
+                        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; margin-bottom:10px;">
+                            <div class="summary-card" style="margin-bottom:0; padding:12px;">
+                                <span class="summary-label">Бошланғич Сальдо</span>
+                                <h4 class="summary-value" id="val-rec-start" style="font-size:1.05rem; margin-top:2px;">
+                                    0 сўм</h4>
+                            </div>
+                            <div class="summary-card" style="margin-bottom:0; padding:12px;">
+                                <span class="summary-label">Охирги Сальдо</span>
+                                <h4 class="summary-value" id="val-rec-end" style="font-size:1.05rem; margin-top:2px;">0
+                                    сўм</h4>
+                            </div>
+                        </div>
+                        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px;">
+                            <div class="summary-card"
+                                style="margin-bottom:0; padding:10px; background:rgba(244,63,94,0.08); border-color:rgba(244,63,94,0.25);">
+                                <span class="summary-label">Жами Дебет (чиқим)</span>
+                                <h5 class="summary-value text-rose" id="val-rec-debet"
+                                    style="font-size:0.95rem; margin-top:2px;">0 сўм</h5>
+                            </div>
+                            <div class="summary-card"
+                                style="margin-bottom:0; padding:10px; background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.25);">
+                                <span class="summary-label">Жами Кредит (кирим)</span>
+                                <h5 class="summary-value text-emerald" id="val-rec-kredit"
+                                    style="font-size:0.95rem; margin-top:2px;">0 сўм</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="list-cards-container" id="list-reconciliation"></div>
+                </div>
+
+                <!-- 7. ТЎЛОВ КУНИ КЕЛГАН (Overdue Debts) -->
+                <div id="tab-content-overdue" class="tab-content">
+                    <div class="payment-type-row" id="overdue-tabs-header" style="margin-bottom:14px;">
+                        <button class="pay-type-btn active" id="btn-overdue-customers" style="font-size:0.82rem;">👥
+                            Харидорлар</button>
+                        <button class="pay-type-btn" id="btn-overdue-suppliers" style="font-size:0.82rem;">🏢
+                            Таъминотчилар</button>
+                    </div>
+
+                    <div class="summary-card" id="overdue-total-card" style="margin-bottom:14px;">
+                        <span class="summary-label" id="overdue-total-label">Жами муддати келган қарз</span>
+                        <h2 class="summary-value text-rose" id="val-overdue-total">0 сўм</h2>
+                    </div>
+
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-overdue" placeholder="Контрагент бўйича қидириш...">
+                        </div>
+                    </div>
+
+                    <div class="list-cards-container" id="list-overdue"></div>
+                </div>
+
+                <!-- 8. ДОЛ БУЙИЧА (Документ бўйича муддати келган қарзлар) -->
+                <div id="tab-content-dok-buyicha" class="tab-content">
+                    <div class="summary-card"
+                        style="margin-bottom:14px; background:rgba(139,92,246,0.08); border-color:rgba(139,92,246,0.3);">
+                        <span class="summary-label" style="color:#c4b5fd;">📋 Документ бўйича муддати келган
+                            қарзлар</span>
+                        <h2 class="summary-value" style="color:#a78bfa;" id="val-dok-total">0 сўм</h2>
+                        <span class="summary-label" id="val-dok-count"
+                            style="font-size:0.72rem; margin-top:2px; display:block;"></span>
+                    </div>
+                    <div class="search-wrapper">
+                        <div class="search-box">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" id="search-dok-buyicha" placeholder="Харидор номи бўйича қидириш...">
+                        </div>
+                    </div>
+                    <div class="list-cards-container" id="list-dok-buyicha"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== NEW PAYMENT MODAL ==================== -->
+        <div id="payment-modal" class="modal-overlay" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3 class="modal-title">Янги Тўлов</h3>
+                    <button id="close-payment-modal" class="modal-close-btn">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" id="modal-pay-type-group">
+                        <label>Тўлов тури</label>
+                        <div class="payment-type-row">
+                            <button class="pay-type-btn active" id="btn-type-receipt" data-type="receipt">📥
+                                Кирим</button>
+                            <button class="pay-type-btn" id="btn-type-disb" data-type="disbursement">📤 Чиқим</button>
+                        </div>
+                    </div>
+                    <div id="payment-counterparty-group" class="form-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                            <label style="margin-bottom: 0;">Контрагент</label>
+                            <button id="add-new-counterparty-btn" type="button" style="background: none; border: none; color: #38bdf8; font-size: 0.8rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px; padding: 0;">
+                                <span>➕ Янги қўшиш</span>
+                            </button>
+                        </div>
+                        <select id="payment-counterparty" class="form-select">
+                            <option value="">— Танланг —</option>
+                        </select>
+                    </div>
+
+                    <!-- New Counterparty Panel (hidden by default) -->
+                    <div id="new-counterparty-container" style="display: none; border: 1.5px solid rgba(56, 189, 248, 0.25); background: rgba(56, 189, 248, 0.04); border-radius: 12px; padding: 12px; margin-bottom: 6px; animation: fadeIn 0.3s ease;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span style="font-size: 0.85rem; font-weight: 700; color: #38bdf8;">Янги Контрагент яратиш</span>
+                            <button id="cancel-new-counterparty-btn" type="button" style="background: none; border: none; color: #fb7185; font-size: 0.78rem; font-weight: 600; cursor: pointer; padding: 0;">Бекор қилиш</button>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 8px;">
+                            <label style="font-size: 0.75rem;">Номи (Ф.И.Ш.)</label>
+                            <input type="text" id="new-counterparty-name" class="form-input" placeholder="Масалан: Алиев Вали" style="height: 38px; font-size: 0.85rem; background:#1e2638;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 8px;">
+                            <label style="font-size: 0.75rem;">Телефон рақами</label>
+                            <div class="input-wrapper" style="height: 38px; font-size: 0.85rem; padding-left: 12px; background:#1e2638;">
+                                <span class="phone-prefix" style="font-size: 0.85rem; padding-right: 6px; margin-right: 6px; height: 18px;">+998</span>
+                                <input type="tel" id="new-counterparty-phone" class="phone-input" placeholder="90 123 45 67" maxlength="12" style="font-size: 0.85rem; height: 100%; border: none;">
+                            </div>
+                        </div>
+                        <button id="save-new-counterparty-btn" type="button" class="btn-primary" style="height: 38px; font-size: 0.88rem; padding: 0; background: linear-gradient(135deg, #0ea5e9, #0284c7); margin-top: 6px; box-shadow: 0 0 15px rgba(14,165,233,0.3);">💾 Сақлаш</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Сумма (сўм)</label>
+                        <input type="text" id="payment-amount" class="form-input" placeholder="0" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label>Изоҳ</label>
+                        <input type="text" id="payment-comment" class="form-input" placeholder="Изоҳ (ихтиёрий)">
+                    </div>
+                    <button id="save-payment-btn" class="btn-primary" style="margin-top:8px;">💾 Сақлаш</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SETTINGS MODAL ==================== -->
+        <div id="settings-modal" class="modal-overlay" style="display:none;">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h3 class="modal-title">⚙️ Созламалар</h3>
+                    <button id="close-settings-btn" class="modal-close-btn">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Сервер манзили (Host)</label>
+                        <input type="text" id="settings-host" class="form-input" placeholder="192.168.1.100">
+                    </div>
+                    <div class="form-group">
+                        <label>Публикация номи</label>
+                        <input type="text" id="settings-pub" class="form-input" placeholder="salafan">
+                    </div>
+                    <div class="form-group">
+                        <label>Сервис Root URL</label>
+                        <input type="text" id="settings-service" class="form-input" placeholder="webapi">
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top:4px;">
+                        <button id="test-settings-btn" class="btn-secondary" style="flex:1;">🔌 Текшириш</button>
+                        <button id="save-settings-btn" class="btn-primary" style="flex:1;">💾 Сақлаш</button>
+                    </div>
+                    <p class="settings-hint">URL: http://HOST/PUB/hs/SERVICE/data</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== GLOBAL LOADER ==================== -->
+        <div id="global-loader" class="loader-overlay" style="display:none;">
+            <div class="spinner-container">
+                <div class="spinner"></div>
+                <p id="global-loader-text">Маълумотлар юкланмоқда...</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="app.js?v=20260711h"></script>
+</body>
+
+</html>
