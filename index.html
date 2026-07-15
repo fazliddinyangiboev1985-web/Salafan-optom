@@ -8,7 +8,7 @@
     <title>STAR SOFT - Дашборд</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260715a">
+    <link rel="stylesheet" href="style.css?v=20260715b">
 </head>
 
 <body>
@@ -132,7 +132,7 @@
                         <div class="menu-circle color-emerald">📥</div>
                         <span class="menu-label">Касса Кирими</span>
                     </div>
-                    <div class="menu-item-container" id="menu-btn-kassa-chiq">
+                    <div class="menu-item-container" id="menu-btn-kassa-chiq" style="display: none;">
                         <div class="menu-circle color-rose">📤</div>
                         <span class="menu-label">Касса Чиқими</span>
                     </div>
@@ -140,7 +140,7 @@
                         <div class="menu-circle color-rose">👥</div>
                         <span class="menu-label">Харидорлар<br>Қарзи</span>
                     </div>
-                    <div class="menu-item-container" id="menu-btn-taminotchilar">
+                    <div class="menu-item-container" id="menu-btn-taminotchilar" style="display: none;">
                         <div class="menu-circle color-orange">🏢</div>
                         <span class="menu-label">Таъминотчилар<br>ҳаққи</span>
                     </div>
@@ -301,7 +301,7 @@
                     <div class="payment-type-row" id="overdue-tabs-header" style="margin-bottom:14px;">
                         <button class="pay-type-btn active" id="btn-overdue-customers" style="font-size:0.82rem;">👥
                             Харидорлар</button>
-                        <button class="pay-type-btn" id="btn-overdue-suppliers" style="font-size:0.82rem;">🏢
+                        <button class="pay-type-btn" id="btn-overdue-suppliers" style="font-size:0.82rem; display: none;">🏢
                             Таъминотчилар</button>
                     </div>
 
@@ -355,7 +355,7 @@
                         <div class="payment-type-row">
                             <button class="pay-type-btn active" id="btn-type-receipt" data-type="receipt">📥
                                 Кирим</button>
-                            <button class="pay-type-btn" id="btn-type-disb" data-type="disbursement">📤 Чиқим</button>
+                            <button class="pay-type-btn" id="btn-type-disb" data-type="disbursement" style="display: none;">📤 Чиқим</button>
                         </div>
                     </div>
                     <div id="payment-counterparty-group" class="form-group">
@@ -440,7 +440,7 @@
         </div>
 
     </div>
-    <script src="app.js?v=20260715a"></script>
+    <script src="app.js?v=20260715b"></script>
 </body>
 
 </html>
