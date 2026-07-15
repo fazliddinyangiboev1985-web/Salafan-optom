@@ -4,6 +4,19 @@
 
 'use strict';
 
+// Safely get abort signal with timeout (compatible with iOS < 16)
+function getTimeoutSignal(ms) {
+    if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+        return AbortSignal.timeout(ms);
+    }
+    if (typeof AbortController !== 'undefined') {
+        const controller = new AbortController();
+        setTimeout(() => controller.abort(), ms);
+        return controller.signal;
+    }
+    return undefined;
+}
+
 // ─── SOZLAMALAR (Local Storage) ────────────────────────────────────────────
 const CFG_KEY = 'salafan_config';
 
@@ -127,7 +140,12 @@ function fmt(num) {
 
 function fmtDate(dateStr) {
     if (!dateStr) return '—';
-    const d = new Date(dateStr);
+    // Replace space with T for ISO string parsing in Safari
+    let cleanStr = dateStr;
+    if (typeof dateStr === 'string') {
+        cleanStr = dateStr.replace(' ', 'T');
+    }
+    const d = new Date(cleanStr);
     if (isNaN(d)) return dateStr;
     return d.toLocaleDateString('ru-RU', { day:'2-digit', month:'2-digit', year:'2-digit' });
 }
@@ -221,7 +239,7 @@ async function apiGet(endpoint) {
             'Accept': 'application/json',
             'Authorization': authHeader
         },
-        signal: AbortSignal.timeout(15000)
+        signal: getTimeoutSignal(15000)
     });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     return resp.json();
@@ -239,7 +257,7 @@ async function apiPost(endpoint, body) {
             'Authorization': authHeader
         },
         body: JSON.stringify(body),
-        signal: AbortSignal.timeout(15000)
+        signal: getTimeoutSignal(15000)
     });
     
     let data;
@@ -644,14 +662,22 @@ function buildHaridorCard(r, cutoff, overdue) {
 
 function isOverdueByDate(muddati, cutoff) {
     if (!muddati) return false;
-    const d = new Date(muddati);
+    let cleanStr = muddati;
+    if (typeof muddati === 'string') {
+        cleanStr = muddati.replace(' ', 'T');
+    }
+    const d = new Date(cleanStr);
     if (isNaN(d)) return false;
     d.setHours(0, 0, 0, 0);
     return d <= cutoff;
 }
 
 function getDaysLeft(muddati, today) {
-    const d = new Date(muddati);
+    let cleanStr = muddati;
+    if (typeof muddati === 'string') {
+        cleanStr = muddati.replace(' ', 'T');
+    }
+    const d = new Date(cleanStr);
     if (isNaN(d)) return null;
     d.setHours(0, 0, 0, 0);
     return Math.round((d - today) / 86400000);

@@ -29,7 +29,9 @@ body {
     color: var(--text-primary);
     overflow: hidden;
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
+    overscroll-behavior: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -595,5 +597,12 @@ input:-webkit-autofill:active {
     #logout-btn-main {
         height: 46px;
         margin-top: 12px;
+    }
+}
+
+/* Prevent zoom on focus in iOS Safari */
+@media (max-width: 767px) {
+    input, select, textarea, .phone-input, .password-input, .form-input, .form-select {
+        font-size: 16px !important;
     }
 }
