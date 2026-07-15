@@ -291,6 +291,9 @@ async function fetchKassaKirimi(force = false) {
             renderKassaKirimi(cached);
             return;
         }
+        document.getElementById('list-kassa-kir').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-kir-total').textContent = '0 сўм';
+        return;
     }
     showLoader('Касса Кирими юкланмоқда...');
     try {
@@ -311,6 +314,9 @@ async function fetchKassaChiqimi(force = false) {
             renderKassaChiqimi(cached);
             return;
         }
+        document.getElementById('list-kassa-chiq').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-chiq-total').textContent = '0 сўм';
+        return;
     }
     showLoader('Касса Чиқими юкланмоқда...');
     try {
@@ -330,6 +336,8 @@ async function fetchTovarlar(force = false) {
             renderTovarlar(cached);
             return;
         }
+        document.getElementById('list-tovar').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        return;
     }
     showLoader('Товарлар рўйхати юкланмоқда...');
     try {
@@ -350,6 +358,9 @@ async function fetchHaridorlar(force = false) {
             renderHaridorlar(cached);
             return;
         }
+        document.getElementById('list-haridorlar').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-haridorlar-total').textContent = '0 сўм';
+        return;
     }
     showLoader('Харидорлар қарзи юкланмоқда...');
     try {
@@ -369,6 +380,9 @@ async function fetchTaminotchilar(force = false) {
             renderTaminotchilar(cached);
             return;
         }
+        document.getElementById('list-taminotchilar').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-taminot-total').textContent = '0 сўм';
+        return;
     }
     showLoader('Таъминотчилар юкланмоқда...');
     try {
@@ -389,6 +403,10 @@ async function fetchDokBuyicha(force = false) {
             renderDokBuyicha(cached);
             return;
         }
+        document.getElementById('list-dok-buyicha').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-dok-total').textContent = '0 сўм';
+        document.getElementById('val-dok-count').textContent = '';
+        return;
     }
     showLoader('Документ бўйича қарзлар юкланмоқда...');
     try {
@@ -460,6 +478,9 @@ async function fetchReconciliation(force = false) {
             renderReconciliation(cached);
             return;
         }
+        list.innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        summaryBox.style.display = 'none';
+        return;
     }
     
     showLoader('Акт сверка юкланмоқда...');
@@ -768,6 +789,9 @@ async function fetchOverdueDebts(force = false) {
             renderOverdueDebts();
             return;
         }
+        document.getElementById('list-overdue').innerHTML = emptyState('🔄', 'Маълумотни юклаш учун янгилаш тугмасини босинг');
+        document.getElementById('val-overdue-total').textContent = '0 сўм';
+        return;
     }
     showLoader('Тўлов муддати келган қарзлар юкланмоқда...');
     try {
