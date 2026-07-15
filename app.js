@@ -226,7 +226,8 @@ function openTab(tabId, title, fetchFn) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-content-' + tabId).classList.add('active');
 
-    if (fetchFn) fetchFn(false);
+    // Do NOT auto-fetch on tab open — user must press the refresh button
+    // Just show empty state placeholder so the user knows what to do
 }
 
 // ─── API CALLS ────────────────────────────────────────────────────────────
@@ -1254,7 +1255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-add-payment-kir').addEventListener('click', () => openPaymentModal('receipt'));
     document.getElementById('btn-add-payment-chiq').addEventListener('click', () => openPaymentModal('disbursement'));
     document.getElementById('menu-btn-reconciliation').addEventListener('click', openReconciliationTab);
-    document.getElementById('reconciliation-counterparty').addEventListener('change', fetchReconciliation);
+    document.getElementById('reconciliation-counterparty').addEventListener('change', () => fetchReconciliation(true));
     
     // Overdue tab triggers
     document.getElementById('btn-haridorlar-overdue').addEventListener('click', () => openOverdueTab('customers'));
