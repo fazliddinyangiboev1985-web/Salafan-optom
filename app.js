@@ -495,22 +495,36 @@ async function fetchReconciliation(force = false) {
     } finally { hideLoader(); }
 }
 
+function populateCounterpartySelect() {
+    const select = document.getElementById('reconciliation-counterparty');
+    if (!select) return;
+    select.innerHTML = '<option value="">— Контрагентни танланг —</option>';
+    counterparties.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.id;
+        opt.textContent = c.nomi;
+        select.appendChild(opt);
+    });
+}
+
 async function openReconciliationTab() {
     openTab('reconciliation', '📄 Акт Сверка', fetchReconciliation);
     
     const select = document.getElementById('reconciliation-counterparty');
     if (select) {
-        showLoader('Контрагентлар юкланмоқда...');
+        // 1. Instantly populate from cache if available
+        const cached = getCachedData('counterparties_list');
+        if (cached && cached.length > 0) {
+            counterparties = cached;
+            populateCounterpartySelect();
+        }
+        // 2. Try to refresh from server (show loader only if no cache)
+        if (!cached || cached.length === 0) {
+            showLoader('Контрагентлар юкланмоқда...');
+        }
         await loadCounterparties();
         hideLoader();
-        
-        select.innerHTML = '<option value="">— Контрагентни танланг —</option>';
-        counterparties.forEach(c => {
-            const opt = document.createElement('option');
-            opt.value = c.id;
-            opt.textContent = c.nomi;
-            select.appendChild(opt);
-        });
+        populateCounterpartySelect();
     }
 }
 
@@ -961,13 +975,24 @@ let selectedPaymentType = 'receipt';
 let counterparties = [];
 
 async function loadCounterparties() {
+    // Try from memory first
     if (counterparties.length > 0) return;
+    // Try from localStorage cache
+    const cached = getCachedData('counterparties_list');
+    if (cached && cached.length > 0) {
+        counterparties = cached;
+    }
+    // Always try to refresh from server in background
     try {
         const data = await apiGet('/data?type=counterparties');
         counterparties = data.rows || [];
+        setCachedData('counterparties_list', counterparties);
     } catch (e) {
         console.error('Failed to load counterparties:', e);
-        showStatus('⚠️ Контрагентларни юклаб бўлмади', 'warning');
+        if (counterparties.length === 0) {
+            showStatus('⚠️ Контрагентларни юклаб бўлмади', 'warning');
+        }
+        // Otherwise silently use cached data
     }
 }
 
